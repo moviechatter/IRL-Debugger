@@ -1,0 +1,50 @@
+{
+    "manifest_version": 3,
+    "name": "IRL Debugger",
+    "version": "0.0.0.1",
+    "description": "Find pests. Kill them.",
+    "icons": {
+        "16": "./icon-16.png",
+        "32": "./icon-32.png",
+        "48": "./icon-48.png",
+        "128": "./icon-128.png"
+      },
+    "action": {
+      "default_icon": "./icon.png"
+    },
+    "permissions": [
+      "storage",
+      "activeTab",
+      "tabs",
+      "webNavigation"
+    ],
+    "background": {
+      "service_worker": "./background.js",
+      "type": "module"
+    },
+    "content_scripts": [
+      {
+        "js": ["./twitch.js"],
+        "matches": [
+          "https://www.twitch.tv/*"
+        ],
+        "name": "alert_box"
+      },
+      {
+        "js": ["./garden.js"],
+        "matches": [
+          "https://www.twitch.tv/squid_is_streaming"
+        ],
+        "run_at": "document_idle",
+        "all_frames": false,
+        "name": "garden_menu_hack_project"
+      }
+    ],
+    "web_accessible_resources": [
+      {
+        "resources": ["node_modules/*", "html/*", "scripts/*", "images/*"],
+        "matches": ["<all_urls>"],
+        "extension_ids": ["ffailakefiofjdlaebbnkjcfpemdmeem"]
+      }
+    ]
+}
