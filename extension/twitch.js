@@ -163,6 +163,8 @@ waitForElm(".video-player__container").then(async (elm) => {
     bugAlertsContainer.style.overflowY = "scroll";
 
     container.appendChild(bugAlertsContainer);
+    await new Promise(resolve => setTimeout(resolve, 3000));
+    capture();
     const bugDetectInterval = setInterval(() => {
       try {
         capture();
